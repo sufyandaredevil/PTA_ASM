@@ -1,8 +1,26 @@
-[CPU MODE: PROTECTED; MEMORY MODEL: FLAT]
+OS ARCHITECTURE: x86 (32 Bit)  
+CPU MODE: PROTECTED  
+MEMORY MODEL: FLAT  
 
 ### Tools to install:
 - `sudo apt install nasm build-essential`
 - `sudo apt install gdb`
+
+### Locations:
+
+### Help MISC:
+- System call definitions:
+  - `cat /usr/include/i386-linux-gnu/asm/unistd32.h`
+
+- Open documentation for a specific syscall:
+  - `man 2 <syscall_func>`
+    - example: `man 2 write`
+
+- Assemble using NASM:
+  - `nasm -f elf32 -o <out_file.o> <in_file.asm>`
+
+- Linking using GNU Linker:
+  - `ld -o <out_file> <in_obj_file.o>`
 
 ### General Commands:
 - Find CPU Details:
