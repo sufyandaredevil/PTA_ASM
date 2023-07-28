@@ -9,7 +9,9 @@
   - `lscpu`
   - `cat /proc/cpuinfo`
 
----
+- View Process Organization:
+  - `cat /proc/<pid>/maps`
+  - `pmap -d <pid>`
 
 ### GDB Commands:
 - To open GDB and debug a program:
@@ -37,3 +39,6 @@
 
 - Switch disassemble syntax to intel:
   - `set disassembly-flavor intel`
+
+- Process map within GDB:
+  - `info proc mappings`
