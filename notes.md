@@ -2,11 +2,19 @@ OS ARCHITECTURE: x86 (32 Bit)
 CPU MODE: PROTECTED  
 MEMORY MODEL: FLAT  
 
+### Fundamental Data Types:
+- Byte - 8 bits
+- Word - 16 bits
+- Double Word - 32 bits
+- Quad Word - 64 bits
+- Double Quad Word - 128 bits
+  > **NOTE:**
+  >  - **Unsigned data type** consumes all the space available 
+  >  - **Signed data type** uses the Most Significant Bit as the Sign Bit
+
 ### Tools to install:
 - `sudo apt install nasm build-essential`
 - `sudo apt install gdb`
-
-### Locations:
 
 ### Help MISC:
 - System call definitions:
@@ -60,3 +68,11 @@ MEMORY MODEL: FLAT
 
 - Process map within GDB:
   - `info proc mappings`
+
+- Step through instructions:
+  - `stepi`
+
+- Examine memory and print location as string:
+  - `x/s <memory_address>`
+    - example: `x/s 0x80490a4`
+
