@@ -19,9 +19,9 @@ MEMORY MODEL: FLAT
 
 ### NASM MISC:
 - Consider the following example:
-  > Define byte 0xAA, 0xBB, 0xCC, OxDD with the label message:
+  > Define byte 0xAA, 0xBB, 0xCC, 0xDD with the label message:
   > ``` asm
-  > message db 0xAA, 0xBB, 0xCC, OxDD
+  > message db 0xAA, 0xBB, 0xCC, 0xDD
   >```
   > Here:
   > - `mov eax, message` - moves **address** into eax
