@@ -186,7 +186,7 @@ MEMORY MODEL: FLAT
 - Print the elfheader:
   - `shell readelf -h <program_name>`
     - example: `shell readelf -h /bin/bash`
-    > **NOTE:** Here `shell` helps to execute available linux programs for the purpose of helping with the debugging process. Here we've used `readelf`. This can also bee used to find the entrypoint if no funcions are found.
+    > **NOTE:** Here `shell` helps to execute available linux programs for the purpose of helping with the debugging process. Here we've used `readelf`. This can also be used to find the entrypoint if no functions are found.
 
 - Print the equivalent c source (if any):
   - `shell cat <in_file>`
@@ -221,4 +221,4 @@ MEMORY MODEL: FLAT
   > - `disassemble $eip,+10` will disassemble for the next `10` bytes of instructions starting from the current value of the `$eip`
   > - The `end` statement is used to indicate that the hook-stop command block is complete, and the defined behavior should end at that point.
   > ---
-  > Further we use `nexti` to single step through the program by pressing `ENTER` key and pressing `c` to continue running the remaining program without debugging
+  > Further we use `nexti` to single step through the program by pressing `ENTER` key and pressing `c` to continue running the remaining program until we hit the next breakpoint.
