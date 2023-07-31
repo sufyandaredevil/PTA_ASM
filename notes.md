@@ -1,6 +1,7 @@
-OS : LINUX (KUBUNTU)  
-OS ARCHITECTURE: x86 (32 Bit)  
+OS : LINUX (UBUNTU 18.04.5)  
+OS ARCHITECTURE: i686 (32 Bit)  
 CPU MODE: PROTECTED  
+CPU ARCHITECTURE: IA-32  
 MEMORY MODEL: FLAT  
 
 ### Fundamental Data Types:
@@ -31,6 +32,10 @@ MEMORY MODEL: FLAT
 - View available System call functions:
   - `cat /usr/include/i386-linux-gnu/asm/unistd32.h`
 
+- Open documentation using man pages:
+  - `man <command|syscall_func>`
+    - example: `man 2 execve`
+
 - Open documentation for a specific Syscall:
   - `man 2 <syscall_func>`
     - example: `man 2 write`
@@ -53,8 +58,37 @@ MEMORY MODEL: FLAT
 
 - Get all shellcode on binary file from objdump:
   - `objdump -d ./<program_name>|grep '[0-9a-f]:'|grep -v 'file'|cut -f2 -d:|cut -f1-6 -d' '|tr -s ' '|tr '\t' ' '|sed 's/ $//g'|sed 's/ /\\x/g'|paste -d '' -s |sed 's/^/"/'|sed 's/$/"/g'`
+   ([CommandLineFu for more](https://www.commandlinefu.com))
 
-- To find the opcode equivalent - `msf-nasm_shell`
+- SHELLCODE Testing:
+  >```c
+  >#include<stdio.h>
+  >#include<string.h>
+  >unsigned char c[] = \
+  >"\x90"; //YOUR SHELLCODE HERE
+  >main(){printf("len: %d\n",strlen(c));int(*r)()=(int(*)())c;r();}
+  >```
+  > Use GCC for compilation (with no stack protection and allow code execution to happen from the stack):
+  >```bash
+  >gcc -fno-stack-protector -z execstack <in_file.c>
+  >```
+  > **NOTE:** Execution overhead is present (to calculate the length of the shellcode in case any bad characters are present), so when analyzing the shellcode using GDB make sure to set up a breakpoint in the address (get using `print /x &c`) of c[ ] using `break *<mem_address_of_c[ ]>` then in turn starts the exection from the shellcode
+
+- Quick disassembly (/w address offset, opcode) of shellcode using disasm:
+  - `echo -ne "\x90<SHELLCODE HERE>" | ndisasm -u -`
+
+- Disassemble an msfpayload in raw mode (executable itself):
+  - `msfpayload -p <linux/x86/shell_bind_tcp> R | ndisasm -u -`
+
+- Emulate shellcode using /libemu(in raw mode for analysis):
+  - `echo msfpayload -p <linux/x86/shell_bind_tcp> R | /libemu/tools/sctest -vvv -Ss 100000`
+
+- Create a graphical flow representation (.dot file) for the given shellcode/exe:
+  - `echo msfpayload -p <linux/x86/shell_bind_tcp> R | /libemu/tools/sctest -vvv -Ss 100000 -G <out_file.dot>`
+    > **NOTE:** We can use a tool under /libemu/tools called dot to change the .dot file to a png:
+    > `dot <in_file.dot> -Tpng -o <out_file.png>`
+
+- To find opcode equivalent for a given instruction - `msf-nasm_shell`
 
 ### General Commands:
 - Find CPU Details:
@@ -79,7 +113,7 @@ MEMORY MODEL: FLAT
 - Examine and disassemble `n` consecutive bytes as instructions:
   - `x/[<n>]i 0x<memory_address>`
 
-### GDB Commands:
+### GDB General Commands:
 - To open GDB and debug a program:
   - `gdb <program_name>`
     - example: `gdb /bin/bash`
@@ -187,4 +221,4 @@ MEMORY MODEL: FLAT
   > - `disassemble $eip,+10` will disassemble for the next `10` bytes of instructions starting from the current value of the `$eip`
   > - The `end` statement is used to indicate that the hook-stop command block is complete, and the defined behavior should end at that point.
   > ---
-  > Further we use `nexti` to single step through the program by pressing `ENTER` key and pressing `C|c` to continue running the remaining program without debugging
+  > Further we use `nexti` to single step through the program by pressing `ENTER` key and pressing `c` to continue running the remaining program without debugging
