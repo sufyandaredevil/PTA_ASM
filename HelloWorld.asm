@@ -28,6 +28,6 @@ section .text ; .text section where where code will be placed
 
 section .data ; .data section where data will be placed
 
-        message: db "Hello World!" ; define byte(db) with a label(message) for the content `Hello World! `
+        message: db "Hello World!" ; define byte(db) with a label(message) for the content `Hello World!`
         ; Also we haven't null terminated the string `Hello World!` and could be terminated if zeroes are present after it
         mlen equ $-message ; contains the string length of the above message
