@@ -1,6 +1,3 @@
-; HelloWorld.asm
-; Author: Ahmed Sufyan
-
 
 global _start ; letting the linker know the entry point using a label / _start identifier
 

@@ -4,6 +4,8 @@ CPU MODE: PROTECTED
 CPU ARCHITECTURE: IA-32  
 MEMORY MODEL: FLAT  
 
+For a quick primer of using syscall in ASM check [this](./HelloWorld.asm) out
+
 ### Fundamental Data Types:
 - Byte - 8 bits
 - Word - 16 bits
