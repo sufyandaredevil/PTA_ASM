@@ -222,3 +222,12 @@ MEMORY MODEL: FLAT
   > - The `end` statement is used to indicate that the hook-stop command block is complete, and the defined behavior should end at that point.
   > ---
   > Further we use `nexti` to single step through the program by pressing `ENTER` key and pressing `c` to continue running the remaining program until we hit the next breakpoint.
+
+### Available Polymorphic Engines (probably old now):
+- ADMutate
+- CLET
+- VX Heavens Mirror
+
+### Available Cryptors (this one too):
+- Hyperion (PE Cyptor)
+  - Decryption happens by bruteforcing an intentional weak AES key during runtime
